@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="icon.png">
+    <title>日语学习</title>
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            padding: 20px;
+            max-width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .chinese {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .japanese {
+            font-size: 24px;
+            color: #e74c3c;
+            min-height: 36px;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #007AFF;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:active {
+            background-color: #0056b3;
+        }
+
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .counter {
+            text-align: center;
+            color: #666;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #000;
+                color: #fff;
+            }
+            .card {
+                background-color: #1c1c1e;
+            }
+            .chinese {
+                color: #fff;
+            }
+            button {
+                background-color: #0A84FF;
+            }
+            .counter {
+                color: #999;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="chinese" id="chinese"></div>
+            <div class="japanese" id="japanese"></div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="toggleJapanese()" id="toggleBtn">显示日语</button>
+            <button onclick="nextPhrase()">下一个</button>
+        </div>
+
+        <div class="nav-buttons">
+            <button onclick="prevPhrase()">上一个</button>
+            <button onclick="randomPhrase()">随机</button>
+        </div>
+
+        <div class="counter" id="counter"></div>
+    </div>
+
+    <script>
+        const phrases = [
+            { chinese: "你好", japanese: "こんにちは" },
+            { chinese: "谢谢", japanese: "ありがとうございます" },
+            { chinese: "对不起", japanese: "すみません" },
+            { chinese: "再见", japanese: "さようなら" },
+            { chinese: "请", japanese: "お願いします" },
+            { chinese: "早上好", japanese: "おはようございます" },
+            { chinese: "晚上好", japanese: "こんばんは" },
+            { chinese: "是的", japanese: "はい" },
+            { chinese: "不是", japanese: "いいえ" },
+            { chinese: "我不明白", japanese: "わかりません" }
+        ];
+
+        let currentIndex = 0;
+        let isJapaneseVisible = false;
+
+        function updateDisplay() {
+            document.getElementById('chinese').textContent = phrases[currentIndex].chinese;
+            document.getElementById('japanese').textContent = isJapaneseVisible ? phrases[currentIndex].japanese : '';
+            document.getElementById('counter').textContent = `${currentIndex + 1} / ${phrases.length}`;
+            document.getElementById('toggleBtn').textContent = isJapaneseVisible ? '隐藏日语' : '显示日语';
+        }
+
+        function toggleJapanese() {
+            isJapaneseVisible = !isJapaneseVisible;
+            updateDisplay();
+        }
+
+        function nextPhrase() {
+            currentIndex = (currentIndex + 1) % phrases.length;
+            isJapaneseVisible = false;
+            updateDisplay();
+        }
+
+        function prevPhrase() {
+            currentIndex = (currentIndex - 1 + phrases.length) % phrases.length;
+            isJapaneseVisible = false;
+            updateDisplay();
+        }
+
+        function randomPhrase() {
+            const newIndex = Math.floor(Math.random() * phrases.length);
+            currentIndex = newIndex;
+            isJapaneseVisible = false;
+            updateDisplay();
+        }
+
+        // 禁用双击缩放
+        document.addEventListener('dblclick', function(e) {
+            e.preventDefault();
+        });
+
+        // 初始化显示
+        updateDisplay();
+    </script>
+</body>
+</html>
