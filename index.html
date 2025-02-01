@@ -25,6 +25,16 @@
             flex-direction: column;
         }
 
+        .page-title {
+            text-align: center;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #007AFF;
+            color: white;
+            margin: 0;
+        }
+
         .container {
             flex: 1;
             padding: 20px;
@@ -112,10 +122,14 @@
             .counter {
                 color: #999;
             }
+            .page-title {
+                background-color: #0A84FF;
+            }
         }
     </style>
 </head>
 <body>
+    <h1 class="page-title">宝宝的日语学习</h1>
     <div class="container">
         <div class="card">
             <div class="chinese" id="chinese"></div>
@@ -137,16 +151,20 @@
 
     <script>
         const phrases = [
-            { chinese: "你好", japanese: "こんにちは" },
-            { chinese: "谢谢", japanese: "ありがとうございます" },
-            { chinese: "对不起", japanese: "すみません" },
-            { chinese: "再见", japanese: "さようなら" },
-            { chinese: "请", japanese: "お願いします" },
-            { chinese: "早上好", japanese: "おはようございます" },
-            { chinese: "晚上好", japanese: "こんばんは" },
-            { chinese: "是的", japanese: "はい" },
-            { chinese: "不是", japanese: "いいえ" },
-            { chinese: "我不明白", japanese: "わかりません" }
+            { chinese: "洗手间在哪里？", japanese: "トイレはどこですか" },
+            { chinese: "这个多少钱？", japanese: "これはいくらですか" },
+            { chinese: "车站在哪里？", japanese: "駅はどこですか" },
+            { chinese: "您会说英语吗", japanese: "英語が話せますか" },
+            { chinese: "很好吃", japanese: "おいしいです" },
+            { chinese: "请带我去酒店", japanese: "ホテルまでお願いします" },
+            { chinese: "可以拍照吗？", japanese: "写真を撮ってもいいですか" },
+            { chinese: "请给我水", japanese: "水をください" },
+            { chinese: "请给我菜单", japanese: "メニューをください" },
+            { chinese: "我想预约", japanese: "予約したいです" },
+            { chinese: "没关系，没事的", japanese: "大丈夫です" },
+            { chinese: "有什么推荐的？", japanese: "おすすめは何ですか" },
+            { chinese: "可以用信用卡吗？", japanese: "クレジットカードは使えますか" },
+            { chinese: "我还会再来", japanese: "また来ます" }
         ];
 
         let currentIndex = 0;
